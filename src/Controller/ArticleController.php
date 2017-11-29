@@ -21,16 +21,32 @@ class ArticleController extends Controller
     /**
      * @Route(path="/show/{slug}", name="article_show")
      */
-    public function showAction()
+    public function showAction($slug)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository(Article::class);
+        $article = $repo->find($slug);
+        return $this->render('entity/Article/show.html.twig', array('article' => $article));
     }
 
     /**
      * @Route(path="/new", name="article_new")
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
         // Seul les auteurs doivent avoir access.
+
+        $article = $this->get(\App\Entity\Article::class);
+        $form = $this->createForm(MaterialType::class, $article);
+        $em = $this->getDoctrine()->getManager();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $em->persist($article);
+            $em->flush();
+            return $this->redirect($this->generateUrl('article_show'));
+        }
+        return $this->render('entity/Article/new.html.twig', array('form' => $form->createView()));
     }
 
     /**

@@ -8,19 +8,152 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * Class User
+ * @package App\Entity
  * @ORM\Entity
+ * @ORM\Table(name="user")
  */
 class User implements UserInterface, \Serializable
 {
-    private $id;
-    private $email;
-    private $firstname;
-    private $lastname;
-    private $password;
-    private $isAuthor = false;
-    private $articles;
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @ORM\Column()
+     */
+    protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column()
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     * @ORM\Column()
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     * @ORM\Column()
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column("boolean")
+     */
+    protected $isAuthor = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Article")
+     */
+    protected $articles;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsAuthor()
+    {
+        return $this->isAuthor;
+    }
+
+    /**
+     * @param boolean $isAuthor
+     */
+    public function setIsAuthor($isAuthor)
+    {
+        $this->isAuthor = $isAuthor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
 
     // Fixme
+
 
     public function getRoles()
     {
@@ -75,5 +208,13 @@ class User implements UserInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 }

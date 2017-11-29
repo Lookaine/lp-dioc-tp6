@@ -9,6 +9,7 @@ class CountViewUpdater
 {
     public function update(Article $article): void
     {
+
         // Incremente le compteur de vue, sauf si l'utilisareur courant est également l'auteur de l'article.
     }
 }

@@ -5,7 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class ArticleStat
+ * @package App\Entity
  * @ORM\Entity
+ * @ORM\Table(name="articleStat")
  */
 class ArticleStat
 {
@@ -13,12 +16,104 @@ class ArticleStat
     const UPDATE = 'update';
     const VIEW = 'view';
 
-    private $id;
-    private $action;
-    private $article;
-    private $date;
-    private $ip;
-    private $user;
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @var string
+     * @ORM\Column()
+     */
+    protected $action;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="articleStat", cascade={"persist"})
+     */
+    protected $article;
+
+    /**
+     * @ORM\Column("DateTime")
+     */
+    protected $date;
+
+    /**
+     * @ORM\Column("integer")
+     */
+    protected $ip;
+
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="articleStat", cascade={"persist"})
+     */
+    protected $user;
+
+    /**
+     * ArticleStat constructor.
+     * @param string $action
+     * @param $article
+     * @param \DateTime $date
+     * @param int $ip
+     * @param $user
+     */
+    public function __construct($action, $article, \DateTime $date, $ip, $user)
+    {
+        $this->action = $action;
+        $this->article = $article;
+        $this->date = $date;
+        $this->ip = $ip;
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
 
     // Uniquement des getter et un constructeur
 }

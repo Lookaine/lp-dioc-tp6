@@ -27,3 +27,20 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+
+    App\Entity\Article:
+            public: true
+            autowire: true
+
+    App\Entity\ArticleStat:
+            public: true
+            autowire: true
+
+    App\Entity\Tag:
+            public: true
+            autowire: true
+
+    App\Entity\User:
+            public: true
+            autowire: true
