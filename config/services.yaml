@@ -2,6 +2,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    limit_article: '%env(LIMIT_ARTICLE)%'
+    token: '%env(TOKEN)%'
 
 services:
     # default configuration for services in *this* file
@@ -31,16 +33,3 @@ services:
 
     App\Entity\Article:
             public: true
-            autowire: true
-
-    App\Entity\ArticleStat:
-            public: true
-            autowire: true
-
-    App\Entity\Tag:
-            public: true
-            autowire: true
-
-    App\Entity\User:
-            public: true
-            autowire: true

@@ -12,5 +12,6 @@ class ViewArticleHandler
     {
         // Appel le service de mise à jour de vue d'un article.
         // Log également un article stat avec pour action view.
+
     }
 }

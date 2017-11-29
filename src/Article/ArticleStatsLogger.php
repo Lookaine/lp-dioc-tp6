@@ -13,5 +13,13 @@ class ArticleStatsLogger
     public function log(Article $article, string $action): void
     {
         // Créer un article stat et le persist.
+        if($action== "create"){
+            new ArticleStat($action, $article, $article->getCreatedAt());
+        }
+        if($action == "update"){
+            new ArticleStat($action, $article, $article->getUpdatedAt());
+        }
+
+
     }
 }

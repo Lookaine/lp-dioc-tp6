@@ -18,5 +18,6 @@ class ArticleStatController extends Controller
     public function showAction()
     {
         // Seul les auteurs doivent avoir access.
+
     }
 }
